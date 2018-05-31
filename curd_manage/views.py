@@ -55,12 +55,15 @@ class EmployeesView(View):
         if not form.is_valid():
             form.validator(request)
             return HttpResponseRedirect('/')
+        avatar = None
+        if request.FILES.get('avatar'):
+            avatar = request.FILES['avatar']
 
         data = form.cleaned_data
         employee = Employee(
             full_name=data.get('name'),
             email=data.get('email'),
-            avatar=request.FILES['avatar'],
+            avatar=avatar,
             address=data.get('address'),
             position_id=data.get('positions').id,
         )

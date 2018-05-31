@@ -115,7 +115,13 @@
 							<tbody>
 								{% for employee in employees %}
 								<tr>
-									<td><img src="{{ employee.avatar.url }}" width="100" onerror="this.src='{% static 'images/avatar_blank.jpg' %}'"></td>
+									<td>
+										{% if employee.avatar %}
+											<img src="{{ employee.avatar.url }}" width="100" onerror="this.src='{% static 'images/avatar_blank.jpg' %}'">
+										{% else %}
+											<img src="{% static 'images/avatar_blank.jpg' %}" width="100">
+										{% endif %}
+									</td>
 									<td>{{ employee.full_name }}</td>
 									<td>{{ employee.email }}</td>
 									<td>{{ employee.address }}</td>
