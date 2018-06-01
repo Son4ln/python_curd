@@ -74,7 +74,10 @@ class EmployeesView(View):
 
     def delete(self, request):
         employee_id = request.POST['employee_id']
-        model = Employee.objects.filter(id=employee_id)
+        model = Employee.objects.filter(id=employee_id).first()
+        fs = FileSystemStorage()
+        if fs.exists(model.avatar):
+            fs.delete(model.avatar)
         model.delete()
         messages.success(request, 'Delete employee success')
         return HttpResponseRedirect('/')
@@ -170,7 +173,7 @@ def get_user(request):
         'secret_key': secret_key
     }
 
-    get_response = python_request.post(url='http://localhost:8000/api/verify-secret-key', headers=headers, data=data)
+    get_response = python_request.post(url='https://vivito-mor-labo.herokuapp.com/api/verify-secret-key', headers=headers, data=data)
     # data = get_response.json()
     # print(data)
     return HttpResponse(get_response)
