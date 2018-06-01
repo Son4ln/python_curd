@@ -10,7 +10,11 @@
 	<div style="width: 900px; margin: 0 auto">
 		<h2 class="text-center py-5">Edit Employee</h2>
         <form method="post" action="{% url 'employee' employee_id=employee_id %}" enctype="multipart/form-data">
-            <center><img src="{{ avatar.url }}" width="300" class="py-3" onerror="this.src='{% static 'images/avatar_blank.jpg' %}'"></center>
+            {% if avatar %}
+                <center><img src="{{ avatar.url }}" width="300" class="py-3" onerror="this.src='{% static 'images/avatar_blank.jpg' %}'"></center>
+            {% else %}
+                <center><img src="{% static 'images/avatar_blank.jpg' %}" width="300" class="py-3"></center>
+            {% endif %}
             {% if messages %}
                 <div class="messages">
                     {% for message in messages %}
