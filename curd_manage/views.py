@@ -174,6 +174,6 @@ def get_user(request):
     }
 
     get_response = python_request.post(url='https://vivito-mor-labo.herokuapp.com/api/verify-secret-key', headers=headers, data=data)
-    # data = get_response.json()
-    # print(data)
+    data = get_response.json()
+    print(data)
     return HttpResponse(get_response)
